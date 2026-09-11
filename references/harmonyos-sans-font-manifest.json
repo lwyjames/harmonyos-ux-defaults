@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "source_package": "HarmonyOS+Sans.zip",
+  "source_package_size": 22636812,
+  "source_package_sha256": "5440a3d9337828eda72e35f48fbb246873bca26e89644d433a8b01b85e45ef85",
+  "captured_date": "2026-09-11",
+  "license": {
+    "file": "LICENSE-update.txt",
+    "size": 32766,
+    "sha256": "7d7acf8e3ac928ae7f34aaa9f8e348dd0476dbb52caaa058e402894d4f6efe73"
+  },
+  "profiles": {
+    "sc": ["HarmonyOS_Sans_SC.ttf"],
+    "tc": ["HarmonyOS_Sans_TC.ttf"],
+    "latin": ["HarmonyOS_Sans.ttf"],
+    "latin-italic": ["HarmonyOS_Sans_Italic.ttf"],
+    "condensed": ["HarmonyOS_Sans_Condensed.ttf"],
+    "condensed-italic": ["HarmonyOS_Sans_Condensed_Italic.ttf"],
+    "arabic-ui": ["HarmonyOS_Sans_Naskh_Arabic_UI.ttf"],
+    "arabic-text": ["HarmonyOS_Sans_Naskh_Arabic.ttf"],
+    "all": [
+      "HarmonyOS_Sans.ttf",
+      "HarmonyOS_Sans_Italic.ttf",
+      "HarmonyOS_Sans_Condensed.ttf",
+      "HarmonyOS_Sans_Condensed_Italic.ttf",
+      "HarmonyOS_Sans_Naskh_Arabic.ttf",
+      "HarmonyOS_Sans_Naskh_Arabic_UI.ttf",
+      "HarmonyOS_Sans_SC.ttf",
+      "HarmonyOS_Sans_TC.ttf"
+    ]
+  },
+  "fonts": {
+    "HarmonyOS_Sans.ttf": {
+      "size": 342076,
+      "sha256": "72d5adb60242fae60686ca94c27e10b89cb7ed2008531390d3f22ac61ad64593",
+      "family": "HarmonyOS Sans",
+      "postscript_name": "HarmonyOS_Sans",
+      "style": "Regular",
+      "weight_axis": [40, 400, 900],
+      "glyph_count": 874
+    },
+    "HarmonyOS_Sans_Condensed.ttf": {
+      "size": 313792,
+      "sha256": "a07c6bd4e6ebe6f44c55350985295c779a2cdce70de21f4361c67d21a8f341c1",
+      "family": "HarmonyOS Sans Condensed",
+      "postscript_name": "HarmonyOS_Sans_Condensed",
+      "style": "Regular",
+      "weight_axis": [40, 400, 900],
+      "glyph_count": 810
+    },
+    "HarmonyOS_Sans_Condensed_Italic.ttf": {
+      "size": 307952,
+      "sha256": "f2e54d86d58d5be546a38eb44edd6cb478a481888b70c9c8187ad4481a74f616",
+      "family": "HarmonyOS Sans Condensed Italic",
+      "postscript_name": "HarmonyOS_Sans_Condensed_Italic",
+      "style": "Regular",
+      "weight_axis": [40, 400, 900],
+      "glyph_count": 810
+    },
+    "HarmonyOS_Sans_Italic.ttf": {
+      "size": 308632,
+      "sha256": "64234302c0e063fe30ce3ee5875e6e02535c023e8de29515972b1e524c346e0a",
+      "family": "HarmonyOS Sans",
+      "postscript_name": "HarmonyOS_Sans_Italic",
+      "style": "Italic",
+      "weight_axis": [40, 400, 900],
+      "glyph_count": 810
+    },
+    "HarmonyOS_Sans_Naskh_Arabic.ttf": {
+      "size": 140872,
+      "sha256": "62ae1dd2ce8f43894978ccf7c6cc2eecb797a13b7a7cdd46eae521d4b38b7d7c",
+      "family": "HarmonyOS Sans Naskh Arabic",
+      "postscript_name": "HarmonyOS_Sans_Naskh_Arabic",
+      "style": "Regular",
+      "weight_axis": [100, 400, 900],
+      "glyph_count": 584
+    },
+    "HarmonyOS_Sans_Naskh_Arabic_UI.ttf": {
+      "size": 140940,
+      "sha256": "061d91a477cedafa3cdbf8574af4440057e7ac2d58628743e65d1223efeae72f",
+      "family": "HarmonyOS Sans Naskh Arabic UI",
+      "postscript_name": "HarmonyOS_Sans_Naskh_Arabic_UI",
+      "style": "Regular",
+      "weight_axis": [100, 400, 900],
+      "glyph_count": 584
+    },
+    "HarmonyOS_Sans_SC.ttf": {
+      "size": 20617156,
+      "sha256": "8978e05044e7089ad6a9de38c505c8148305607983487435a916d2610700a7ca",
+      "family": "HarmonyOS Sans SC / 鸿蒙黑体",
+      "postscript_name": "HarmonyOS_Sans_SC",
+      "style": "Regular",
+      "weight_axis": [40, 400, 900],
+      "glyph_count": 29508
+    },
+    "HarmonyOS_Sans_TC.ttf": {
+      "size": 9980028,
+      "sha256": "6fb487e96d456b0e15875899c1a8180da828944bfe66fbf1ceffbb0177b9ee6d",
+      "family": "HarmonyOS Sans TC / 鴻蒙黑體",
+      "postscript_name": "HarmonyOS_Sans_TC",
+      "style": "Regular",
+      "weight_axis": [40, 400, 900],
+      "glyph_count": 14593
+    }
+  }
+}

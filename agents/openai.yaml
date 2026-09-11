@@ -1,0 +1,14 @@
+interface:
+  display_name: HarmonyOS UX Defaults
+  short_description: Apply HarmonyOS defaults to UX and prototypes
+  default_prompt: Use $apply-harmonyos-ux-defaults to design this experience with
+    HarmonyOS-native UX defaults.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
