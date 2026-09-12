@@ -22,7 +22,7 @@
 - 新增主执行规范 `SKILL.md`，定义平台优先级、默认设备、设计工作流、验证要求和原型交付规则。
 - 新增 `agents/openai.yaml` Skill 元数据。
 - 加入 2026-09-03 冻结的 16 份核心 HarmonyOS 设计文档基线、可检索文本和来源索引。
-- 新增 Pura X Max 展开竖屏/横屏、Pura X View 和 Pura 90 Pro Max 的设备映射与官方机框工作流。
+- 新增 Pura X Max 展开竖屏/横屏、Pura X View 和 Pura 90 Pro Max 的设备机框与官方机框工作流。
 - 新增默认桌面、状态栏、导航指示条和系统区域规范。
 - 新增 Flash Control Ball/Window（闪控球/闪控窗）系统表面规范。
 - 新增 Picture-in-Picture（画中画）行为与适用范围。
