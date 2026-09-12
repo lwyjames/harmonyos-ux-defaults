@@ -222,6 +222,7 @@ Before final text rendering, run `scripts/resolve_harmonyos_fonts.py` for the de
 - Read [navigation-bar-geometry.md](navigation-bar-geometry.md). For logical screen width `W`, use visible-indicator width `112 vp` at `360 <= W < 600`, `W / 3 - 48 vp` at `600 <= W <= 840`, and `W / 4 - 48 vp` at `W > 840`.
 - Render the visible indicator as a 6 vp-high capsule, center it horizontally, and position its bottom edge 6 vp above the visible bottom of the screen opening. In a bezeled raster output, use the mapped bezel's center-connected alpha aperture to find that boundary; do not measure from the capsule centerline or from screen rows hidden beneath the bottom bezel.
 - Keep a separate invisible interaction region centered at the bottom: width `35%` of `W`, height `28 vp`, bottom edge flush with the visible screen bottom. Do not render this as a 28 vp-high bar or alter the visible UI scale to create it.
+- On an ordinary light app surface, continue the app's bottom surface through the navigation region and use the screenshot-derived project default `rgba(0, 0, 0, 0.08)` for the indicator. A substrate near `#F6F6F6` should flatten near `#E3E3E3`. Do not bake that gray as a universal fill. On dark, colored, image, or high-variance backgrounds, use the native system appearance or semantic inversion/adaptation and verify visibility; do not reuse 8% black blindly.
 - The earlier `1252 x 84 px`, 42 px radius, and 16 px offset are superseded and must not appear in new outputs. Runtime code must use HarmonyOS system navigation and reported insets rather than hard-coded raster pixels.
 - The system navigation bar is software chrome inside the screen opening. A device bezel, app bottom tab bar, toolbar, or floating action control does not replace it.
 - Do not omit the bar merely to make a mockup cleaner or to gain vertical space. Omission requires an explicit user override, a floating window, Picture-in-Picture, Pura X/Pura X Max-like compact outer display, or the post-timeout hidden phase of a qualifying immersive state.
@@ -239,6 +240,14 @@ Before final text rendering, run `scripts/resolve_harmonyos_fonts.py` for the de
 - On wide-screen immersive content, fill the available width/height rather than leaving unused bands because of the navigation bar.
 - Short video: fill the vertical display and lift bottom controls above the navigation area.
 - Read [system-chrome-verification.md](system-chrome-verification.md) before finalizing or reviewing any rendered screen.
+
+### WeChat conversation reference
+
+- Read [wechat-chat-interface.md](wechat-chat-interface.md) when the task explicitly shows WeChat, asks for a WeChat conversation screen, or uses WeChat as the background beneath a system surface.
+- Apply the reference only to the app-owned chat layer. Ignore its source screenshot's status bar; HarmonyOS status-bar, navigation geometry, device-bezel, and cutout rules remain authoritative.
+- Use a quiet light-neutral conversation field, centered low-emphasis time separators, white incoming bubbles with left avatars, soft green outgoing bubbles with right avatars, and a fixed light composer above the system navigation region.
+- Never reproduce the screenshot's contact, avatars, private messages, numbers, or stickers. The screenshot is not an asset and must not be bundled.
+- A Live View card or other system overlay covers the conversation without reflowing or pushing it downward unless the requested interaction explicitly changes layout.
 
 ## 7. Multi-window
 

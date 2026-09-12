@@ -25,9 +25,26 @@ The visible indicator is a horizontally centered capsule:
 - The indicator centerline is therefore `9 vp` above the visible screen bottom.
 - Use a capsule/pill with fully rounded ends. If the renderer requires an explicit radius, `3 vp` is the geometric half-height derived from the 6 vp capsule; it is not a separate source token.
 - The newer 6 vp multi-device figure controls over the 5 vp legacy example shown alongside it.
-- The supplied figures define no new color or opacity value. Preserve the applicable system-owned navigation-indicator appearance and existing contrast/background behavior; do not invent a tint or alpha.
+- The 2026-09-10 geometry figures define no color or opacity value. The later user-approved light-app treatment below is a project convention inferred from a separate 2026-09-12 screenshot; keep the provenance distinct.
 
 The corrected rules replace the earlier `1252 x 84 px` capsule, `42 px` radius, and `16 px` bottom offset. Never retain or scale those obsolete values.
+
+## Visual treatment and translucency
+
+For ordinary light application surfaces, use the 2026-09-12 screenshot-derived project default:
+
+- Continue the app's bottom surface behind the navigation region instead of inserting an unrelated solid strip.
+- When that substrate is a quiet near-white surface, render the system indicator as neutral black at approximately 8% opacity: `rgba(0, 0, 0, 0.08)`.
+- The supplied flattened JPEG measured approximately `#F6F6F6` for the navigation substrate and `#E3E3E3` for the indicator. The alpha model reproduces that relationship within JPEG and antialiasing tolerance.
+- Implement the indicator as a translucent neutral semantic layer, not as a universally baked `#E3E3E3` fill. This allows the app surface to remain visually continuous.
+- Do not use an app accent, brand green, sampled wallpaper hue, outline, shadow, or separate capsule background.
+
+The screenshot contains only a light, low-variance bottom surface. Therefore:
+
+- `8%` black is a **project default inferred from the screenshot**, not a Huawei or WeChat official token and not a universal dark-mode value.
+- On dark, colored, image, video, or high-variance backgrounds, do not reuse 8% black. Use the native system-owned indicator when available; otherwise select the neutral light/dark semantic foreground through system inversion/adaptation and verify that it remains visible while subordinate to app content.
+- If the native HarmonyOS runtime supplies the indicator color/alpha, its rendered system output controls over this static-mockup approximation.
+- For mockups, sample the actual local substrate under and around the indicator. Reject an indicator that disappears, becomes an opaque decorative bar, or creates an unrelated bottom band.
 
 ## Invisible interaction region
 
@@ -60,7 +77,8 @@ For every state where the navigation indicator is visible:
 6. Confirm bottom content clears the 28 vp region and that hidden/absent navigation states do not retain wasted padding.
 7. For a bezeled output, measure from the bezel-derived visible bottom of the center-connected aperture and confirm the full bar remains visible above the inner lip.
 8. Reject any output that uses the superseded fixed-pixel geometry or chooses the wrong responsive width branch.
+9. On an ordinary light app surface, confirm the background continues behind the navigation region and the indicator uses the neutral `rgba(0, 0, 0, 0.08)` project default; on other backgrounds, confirm semantic inversion/adaptation was used instead of blindly applying that light-surface alpha.
 
 Acceptance criterion:
 
-> The visible navigation indicator is a centered 6 vp-high capsule whose bottom edge is 6 vp above the visible screen bottom, whose width matches the current logical-width formula, and whose separate invisible interaction region is centered, bottom-anchored, 35% of screen width, and 28 vp high.
+> The visible navigation indicator is a centered 6 vp-high capsule whose bottom edge is 6 vp above the visible screen bottom, whose width matches the current logical-width formula, and whose separate invisible interaction region is centered, bottom-anchored, 35% of screen width, and 28 vp high. Its neutral translucent appearance integrates with the local app surface: use the 8%-black project default on ordinary light surfaces and system semantic inversion/adaptation elsewhere.

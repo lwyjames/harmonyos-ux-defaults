@@ -19,6 +19,7 @@
 - 对安全与隐私界面应用对应的品牌资产和校验约束。
 - 使用外置 HarmonyOS Sans 字体资产，并在高保真输出前进行文件和校验和验证。
 - 提供导航条、实况窗、字体和设备机框的确定性计算或验证脚本。
+- 提供基于文字重建的微信聊天界面参考，并将底部导航指示条的浅色半透明处理推广为跨应用默认规则。
 
 ## 适用场景
 
@@ -78,6 +79,7 @@ harmonyos-ux-defaults/
 ├── assets/
 ├── references/
 │   ├── quick-reference.md
+│   ├── wechat-chat-interface.md
 │   ├── device-preview-frames.md
 │   ├── system-chrome-verification.md
 │   ├── navigation-bar-geometry.md
@@ -118,8 +120,16 @@ harmonyos-ux-defaults/
 - 宽度根据当前逻辑屏幕宽度响应式计算。
 - 独立的不可见交互区域为 `35% W × 28 vp`。
 - 不得把交互热区渲染成可见的大型胶囊。
+- 普通浅色应用界面中，应用底部浅色表面应延伸到系统导航区域；导航指示条使用中性黑约 `8%` 的半透明语义层。参考截图中的观测合成为约 `#F6F6F6` 底面与 `#E3E3E3` 指示条。
+- 深色、彩色、图像或高变化背景不得机械复用 `8%` 黑色；应使用系统语义反转或自适应处理，并验证对比度。
 
 完整规则见 [`references/navigation-bar-geometry.md`](references/navigation-bar-geometry.md)。
+
+### 微信聊天界面
+
+微信一对一聊天的应用层参考见 [`references/wechat-chat-interface.md`](references/wechat-chat-interface.md)。该参考以文字和近似颜色记录界面结构，不包含原始截图，也不得复用截图中的联系人、头像、消息、票务信息或贴纸。截图状态栏不属于该参考范围，仍由 HarmonyOS 系统栏规范控制。
+
+聊天界面应保留左右消息流、头像与气泡关系、居中时间分隔、固定底部输入区，以及系统覆盖层出现时不重排聊天内容的行为。
 
 ### 展开实况窗
 

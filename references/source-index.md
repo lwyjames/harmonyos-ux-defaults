@@ -1,6 +1,6 @@
 # Source Index and Routing
 
-The core baseline consists of 16 PDFs supplied by the user on 2026-09-03. The supplemental system-feature set contains two PDFs supplied on 2026-09-07 and 2026-09-08. Security/privacy branding, device-bezel, and Pura X Max-like wide-foldable supplements were supplied on 2026-09-09. The editable Live View Sketch geometry template and corrected responsive navigation-bar screenshots were supplied on 2026-09-10. The Pura X View full-canvas expanded Live View reference was supplied on 2026-09-11. Supplemental materials extend the core baseline. The navigation screenshots supersede only older navigation-indicator geometry; the Pura X View reference supersedes only conflicting expanded phone-card geometry, placement, radius, material, and local-region values. Each PDF has a matching plain-text extraction with the same basename. Other supplements are represented by their routed reference files and bundled source assets.
+The core baseline consists of 16 PDFs supplied by the user on 2026-09-03. The supplemental system-feature set contains two PDFs supplied on 2026-09-07 and 2026-09-08. Security/privacy branding, device-bezel, and Pura X Max-like wide-foldable supplements were supplied on 2026-09-09. The editable Live View Sketch geometry template and corrected responsive navigation-bar screenshots were supplied on 2026-09-10. The Pura X View full-canvas expanded Live View reference was supplied on 2026-09-11. A WeChat conversation screenshot was analyzed on 2026-09-12 and retained only as the textual reconstruction in `references/wechat-chat-interface.md`; the original screenshot is intentionally excluded. Supplemental materials extend the core baseline. The navigation screenshots supersede only older navigation-indicator geometry; the Pura X View reference supersedes only conflicting expanded phone-card geometry, placement, radius, material, and local-region values. Each PDF has a matching plain-text extraction with the same basename. Other supplements are represented by their routed reference files and bundled source assets.
 
 ## How to consult sources
 
@@ -76,6 +76,12 @@ When an individual PDF is absent, extract the requested byte-exact source to a t
 |---|---|---|
 | `references/navigation-bar-geometry.md`, transcribed from the two user-supplied corrected geometry screenshots | 2026-09-10 | Responsive visible-indicator width by logical screen width, 6 vp visible height, 6 vp bottom-edge gap, separate `35% W x 28 vp` bottom interaction region, logical-to-raster mapping, and rejection of the superseded fixed-pixel mockup geometry. |
 
+## Supplemental WeChat chat-interface source
+
+| Source | Added | Read/use for |
+|---|---|---|
+| `references/wechat-chat-interface.md`, reconstructed from a user-supplied screenshot that is intentionally not bundled | 2026-09-12 | WeChat/chat app-bar, conversation field, incoming/outgoing bubble hierarchy, time separators, avatars, composer, overlay behavior, privacy-safe fictional content, and the light navigation-region appearance. Ignore the source status bar. The observed `#F6F6F6` substrate / `#E3E3E3` indicator relationship is modeled as approximately 8% neutral black for ordinary light app surfaces and extended cross-application through `references/navigation-bar-geometry.md`. |
+
 ## Supplemental wide-foldable source
 
 | Source | Snapshot update | Read for |
@@ -85,6 +91,7 @@ When an individual PDF is absent, extract the requested byte-exact source to a t
 ## Common routing combinations
 
 - Any phone screen: layout + spacing + radius + typography + color + UI language + status bar + navigation bar; use `references/system-chrome-verification.md` before delivery and `references/navigation-bar-geometry.md` whenever the indicator is visible.
+- WeChat conversation or WeChat background beneath a system surface: phone set + `references/wechat-chat-interface.md`; ignore the screenshot status bar, preserve HarmonyOS system chrome, use fictional content, and do not bundle the screenshot.
 - Foldable/tablet/PC screen: phone set + responsive architecture + multi-window.
 - Pura X/Pura X Max-like wide foldable, similarly proportioned compact screen, outer display, or fold/unfold flow: phone set + responsive architecture + multi-window + wide-foldable source; add Picture-in-Picture for qualifying video continuity. Resolve the exact inner/unfolded versus outer/compact display state before applying outer-display restrictions.
 - Share flow: phone set + sharing; add Tap-to-Share when devices touch.
