@@ -4,9 +4,13 @@
 
 格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号采用 [Semantic Versioning](https://semver.org/lang/zh-CN/) 约定。除非特别说明，日期使用 `YYYY-MM-DD` 格式。
 
-> 当前仓库尚未创建 GitHub Release 或版本标签。`1.0.0` 是首次完整 GitHub 快照的版本标识；创建正式 Release 时应建立对应的 `v1.0.0` 标签。
+> 正式版本通过 Git 标签与 GitHub Release 发布；`Unreleased` 仅记录尚未进入下一个正式版本的变更。
 
 ## [Unreleased]
+
+当前暂无待发布变更。
+
+## [1.1.0] - 2026-09-13
 
 ### Added
 
@@ -106,5 +110,6 @@
 - **2026-09-10**：加入实况窗 Sketch 几何来源，并用更正截图替换旧导航条固定像素规则。
 - **2026-09-11**：加入 Pura X View 展开实况窗完整画布参考和 HarmonyOS Sans 字体资产规范；发布首次完整 GitHub 快照。
 
-[Unreleased]: https://github.com/lwyjames/harmonyos-ux-defaults/compare/acb2bc573b1a50afa3b5166f8af9d33ad55a3fe1...HEAD
+[Unreleased]: https://github.com/lwyjames/harmonyos-ux-defaults/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/lwyjames/harmonyos-ux-defaults/releases/tag/v1.1.0
 [1.0.0]: https://github.com/lwyjames/harmonyos-ux-defaults/commit/acb2bc573b1a50afa3b5166f8af9d33ad55a3fe1
