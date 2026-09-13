@@ -36,10 +36,17 @@ DEVICE_MAP = {
         "bezel": SKILL_ROOT
         / "assets/device-bezels/pura-x-max-unfolded-portrait.png",
         "bezel_rotation": "clockwise_90",
+        "camera_position": "upper-right",
     },
     "pura-x-view-front": {
         "screen_size": (1320, 2232),
         "bezel": SKILL_ROOT / "assets/device-bezels/pura-x-view-front.png",
+    },
+    "pura-x-view-front-landscape": {
+        "screen_size": (2232, 1320),
+        "bezel": SKILL_ROOT / "assets/device-bezels/pura-x-view-front.png",
+        "bezel_rotation": "counterclockwise_90",
+        "camera_position": "left-center",
     },
     "pura-90-pro-max-portrait": {
         "screen_size": (1308, 2880),
@@ -520,6 +527,8 @@ def main() -> int:
     bezel_rotation = mapping.get("bezel_rotation", "none")
     if bezel_rotation == "clockwise_90":
         bezel = bezel.transpose(Image.Transpose.ROTATE_270)
+    elif bezel_rotation == "counterclockwise_90":
+        bezel = bezel.transpose(Image.Transpose.ROTATE_90)
     elif bezel_rotation != "none":
         raise ValueError(f"Unsupported mapped bezel rotation: {bezel_rotation}")
     bezel_alpha = bezel.getchannel("A")
@@ -627,9 +636,7 @@ def main() -> int:
         "bezel": {
             "path": str(bezel_path),
             "source_rotation": bezel_rotation,
-            "camera_position": (
-                "upper-right" if bezel_rotation == "clockwise_90" else "source-defined"
-            ),
+            "camera_position": mapping.get("camera_position", "source-defined"),
             "native_size": list(bezel.size),
             "output_size": list(screen_canvas.size),
             "resized_or_cropped": False,

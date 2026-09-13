@@ -2,6 +2,8 @@
 
 Use this reference whenever a phone home screen, launcher, desktop, status bar, or navigation bar appears in a UX requirement, mockup, flow, keyframe, generated image, presentation visual, or prototype preview.
 
+For a lock screen, also read [lock-screen-visual-defaults.md](lock-screen-visual-defaults.md). Its Pura X View camera/status anchors and wallpaper-derived clock/shortcut materials apply without turning the supplied lock-screen screenshot into a reusable asset.
+
 ## Mapped home-screen masters
 
 | Device and state | Operational PNG | Compact lossless source | Supplied master pixels |
@@ -23,6 +25,13 @@ Use this reference whenever a phone home screen, launcher, desktop, status bar, 
 - Match the reference's physical left-to-right order: **NearLink logo → Wi-Fi 7 logo → dual stacked 5A cellular signals → battery**. Equivalently, from the screen's right edge inward, the order is battery → dual 5A → Wi-Fi 7 → NearLink.
 - Preserve the NearLink mark, the Wi-Fi 7 identifier/details, two stacked 5A rows with their signal dots/bars, and the battery shape with **100**. Do not replace these with generic Bluetooth/NFC, ordinary Wi-Fi, a single cellular row, a different network label, or a generic battery icon.
 - Use the reference geometry and relative spacing. Select black or white foreground content only as needed to satisfy the existing local-background contrast rule; do not change the icon order or anatomy.
+- On Pura X View portrait, position the left status item at `x=32 vp`, end the battery at `x=408 vp`, and optically align both groups to `y=27 vp`, following [lock-screen-visual-defaults.md](lock-screen-visual-defaults.md). These anchors do not change the default time, icon order, or battery value.
+
+## Lock-screen visual material
+
+- Do not reuse a mapped home-screen PNG as a lock-screen screenshot. Construct the lock screen from its intended wallpaper and system-owned elements.
+- Derive the large clock's light tint from the local wallpaper palette and use the reconstructed translucent treatment in [lock-screen-visual-defaults.md](lock-screen-visual-defaults.md), instead of defaulting to unrelated opaque white.
+- Use the documented circular lower-shortcut morphology, symmetric placement, wallpaper-derived translucent tint, and bottom interaction-region relationship. Keep every blur, tint, and opacity effect inside its intended glyph or circle.
 
 ## Default navigation bar geometry
 
@@ -43,3 +52,5 @@ Reject a phone visual unless all applicable checks pass:
 - a mapped default home screen uses the correct supplied PNG without internal redesign or crop;
 - another phone's adapted home screen preserves the supplied icon/widget language and layout relationships;
 - system chrome remains inside the screen opening and the final phone passes bezel-seam verification.
+- a Pura X View portrait status row uses the `32 vp` side anchors and `y=27 vp` optical center without changing the required cluster anatomy;
+- any lock-screen clock and lower shortcuts pass [lock-screen-visual-defaults.md](lock-screen-visual-defaults.md), including wallpaper-derived color, translucency, shape, symmetry, and effect-boundary checks.

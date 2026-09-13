@@ -17,13 +17,13 @@ Do not copy the normal portrait treatment into every state. Apply the state-spec
 ### Navigation-bar presence gate
 
 - Default to **visible** for every normal full-screen phone app window, including Pura X Max unfolded portrait.
-- Treat absence as an exception that requires one of these reasons: explicit user override; floating window; Picture-in-Picture; Pura X/Pura X Max-like compact outer display; or the post-timeout hidden phase of a qualifying immersive experience.
-- If the state is unclear or no exception can be named, render the navigation bar. Do not optimize it away for aesthetics or screen space.
+- Treat absence as an exception that requires one of these reasons: explicit user override; floating window; Picture-in-Picture; Pura X/Pura X Max-like compact outer display; the post-timeout hidden phase of a qualifying immersive experience; or a single static game mockup with no stated phase, which defaults to that hidden phase.
+- If the state is unclear or no exception can be named, render the navigation bar. A single static game mockup with no stated phase is not ambiguous: use its defined post-timeout hidden default. Do not optimize the bar away for aesthetics or screen space.
 - Render the system navigation indicator inside the screen opening. A hardware bezel, app tab bar, toolbar, or bottom action is not a substitute.
 - Use one system navigation indicator only. Do not duplicate it in both the UI canvas and bezel artwork.
 - Calculate every visible navigation indicator from [navigation-bar-geometry.md](navigation-bar-geometry.md): a horizontally centered 6 vp-high capsule, its bottom edge exactly 6 vp above the visible screen bottom, and responsive width `112 vp` for `360 <= W < 600`, `W / 3 - 48 vp` for `600 <= W <= 840`, or `W / 4 - 48 vp` for `W > 840`. Derive the visible boundary from the mapped bezel's center-connected alpha aperture; ignore raw canvas rows occluded by the bottom bezel.
 - Keep the centered `35% W x 28 vp` interaction region separate, invisible, and bottom-anchored. Do not turn it into a visible 28 vp-high capsule or background.
-- In a single static immersive mockup with no phase specified, render the initial/default visible state. In a multi-frame sequence, include the initial/revealed visible state and post-timeout hidden state when the transition matters.
+- In a single static **game** mockup with no phase specified, omit the indicator and represent the post-timeout hidden state. In other single static immersive mockups with no phase specified, render the initial/default visible state. In a multi-frame sequence, include the initial/revealed visible state and post-timeout hidden state when the transition matters.
 
 ## 2. Status bar rules
 
@@ -31,6 +31,7 @@ Do not copy the normal portrait treatment into every state. Apply the state-spec
 - Default static phone time to **08:08** unless a different time is required to communicate the scenario accurately.
 - At the status bar's right end, follow `assets/system-chrome/status-bar-right-default-reference.png`. Match its physical left-to-right order: NearLink logo, Wi-Fi 7 logo, dual stacked 5A cellular signals, battery 100. From the screen's right edge inward, this is battery, dual 5A, Wi-Fi 7, NearLink.
 - Preserve the reference icon anatomy and relative spacing. Do not replace NearLink with a generic Bluetooth/NFC symbol, omit the Wi-Fi 7 identifier, collapse dual 5A into one cellular row, or replace battery 100 with a generic battery state.
+- For Pura X View portrait, use the screenshot-derived placement anchors in [lock-screen-visual-defaults.md](lock-screen-visual-defaults.md): left-item edge `x=32 vp`, battery trailing edge `x=408 vp`, approximate top visible bound `17 vp`, and optical row center `y=27 vp`. Apply them to the existing default/status content; do not copy the screenshot's scenario-specific carrier or battery values.
 - Keep its content clear of the device camera/cutout and rounded corners.
 - Use a transparent background by default and extend the page background through the region for an integrated appearance. Do not create an unrelated strip solely behind the status bar.
 - Select black or white status content from the local background, not from the page's average color.
@@ -61,9 +62,10 @@ Do not copy the normal portrait treatment into every state. Apply the state-spec
 | State | Status bar | Navigation bar | Verification focus |
 |---|---|---|---|
 | Normal portrait | Visible | Visible and rendered | Cutout avoidance, local contrast, integrated backgrounds, 28 vp interaction-region clearance |
+| Transient portrait Push Notification banner | Visible and unchanged | Follow the underlying window state | Banner `(16,50,W-32,64) vp`, radius 16; status/cutout clearance; overlay without underlay reflow; no duplicate Live View event |
 | Live View capsule | Visible/system-owned host | Follow the underlying window state | 80 x 28 default or space-verified 128 x 28 expanded geometry; cutout anchor; no collision with time/connectivity/battery; no simultaneous card |
 | Normal phone landscape | Temporarily hidden | Visible and rendered | More content vertically; navigation adaptation remains; app bottom controls usually hidden |
-| Full-screen immersive | Temporarily hidden when justified | Initially visible and rendered; hides after 2 seconds | Single unspecified static frame shows visible phase; sequences communicate visible/revealed and hidden phases |
+| Full-screen immersive | Temporarily hidden when justified | Initially visible and rendered; hides after 2 seconds | A single unspecified static game frame defaults to hidden; other unspecified static immersive frames default to visible; sequences communicate visible/revealed and hidden phases |
 | Scrollable page/WebView | Visible unless state says otherwise | Visible and rendered | Content may pass behind; final item/action and bottom scrollbar clear the bar |
 | Fixed or floating bottom action | Visible unless state says otherwise | Visible and rendered | Action lifts above navigation and remains usable with keyboard shown |
 | Half-modal or popup | Visible unless state says otherwise | Visible and rendered above modal layer | Scroll overflow safely; final action and popup do not collide with the bar |
@@ -73,7 +75,7 @@ Do not copy the normal portrait treatment into every state. Apply the state-spec
 | Picture-in-Picture | Not represented as app chrome | Absent inside window | No duplicated system chrome or wasted inset |
 | Pura X/Pura X Max-like compact outer display | Hidden; release space | Absent; release space | Do not apply this restriction to the unfolded inner display |
 | Short video | State-dependent | Visible and rendered unless explicitly showing the post-timeout immersive phase | Video fills vertically; bottom controls never overlap navigation |
-| Game | Immersive/temporarily hidden | Initially visible and rendered; hides after 2 seconds | Bottom swipe reveals; second swipe performs navigation |
+| Game | Immersive/temporarily hidden | Runtime: initially visible, then hidden after 2 seconds; single unspecified static mockup: hidden | Bottom swipe reveals; second swipe performs navigation; explicit initial/revealed mockups show the bar |
 
 ## 5. Design workflow checkpoint
 
@@ -87,6 +89,7 @@ Before high-fidelity styling:
 6. Add window-mode, orientation, keyboard, fold-state, immersive, and modal variants that materially change system chrome.
 7. Mark every deliberate omission or time override with its qualifying state and cite the governing source or user instruction.
 8. If Live View is present, mark its capsule host, cutout anchor, default/expanded state, and collision envelope; record why the chosen state fits the available status-bar width.
+9. If a transient portrait Push Notification banner is present, read [push-notification-banner.md](push-notification-banner.md), keep the status row unchanged, and verify its `y=50 vp` placement clears the cutout/status content without moving the underlay.
 
 ## 6. Delivery evidence
 
@@ -96,6 +99,8 @@ Before high-fidelity styling:
 - Inspect the local pixels/material beneath the indicator. For ordinary light app surfaces, confirm continuous substrate and the neutral 8%-black project treatment; for other substrates, record the native or semantic inverted treatment and reject a missing, accent-colored, opaque, or blindly copied light-mode indicator.
 - Reject any fixed `1252 x 84 px`, 42 px radius, or 16 px gap; reject a rectangular indicator, a gap measured from the centerline, a 28 vp-high visible indicator, or a hot region inferred from the indicator bounds.
 - Verify 08:08 in every static phone frame without a scenario-specific time and verify the right-side cluster's NearLink, Wi-Fi 7, dual stacked 5A, battery-100 anatomy and order.
+- For every transient portrait Push Notification banner, verify the status row and cutout remain unchanged and clear; the screenshot's scenario-specific time/status values do not replace the skill defaults. Require the complete banner geometry and zero-change exterior checks in [push-notification-banner.md](push-notification-banner.md).
+- On Pura X View portrait, also verify the left and right status groups use the `32 vp` edge anchors, share the camera's `y=27 vp` optical center, and clear the corrected `22 vp` circular camera.
 - For every Live View capsule, verify the measured 80 x 28 or 128 x 28 geometry, correct centered-hole versus left-side placement, clear separation from fixed status content, and mutual exclusion with the floating/card form.
 - Reject a normal full-screen phone mockup that omits the navigation bar, even when its bottom spacing happens to look safe.
 - Verify the darkest and lightest status-region backgrounds, including imagery and gradients, against the 1.9 threshold.

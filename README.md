@@ -20,6 +20,11 @@
 - 使用外置 HarmonyOS Sans 字体资产，并在高保真输出前进行文件和校验和验证。
 - 提供导航条、实况窗、字体和设备机框的确定性计算或验证脚本。
 - 提供基于文字重建的微信聊天界面参考，并将底部导航指示条的浅色半透明处理推广为跨应用默认规则。
+- 提供 Pura X View 锁屏视觉、桌面 Push 通知和锁屏通知卡片规范，并可响应式推演到其他竖屏手机。
+- 提供小艺智能助手完整界面规范，包括玻璃按钮、对话气泡、功能 Chips、输入区及其响应式布局。
+- 对手机与手、人物、环境的组合采用“设备母版优先、场景后合成”流程，保护所有机型在横竖屏中的屏幕比例、机框、前摄和系统栏几何。
+- 展开实况窗必须覆盖而不推动底层应用内容；模糊、取色和透明材质严格裁切在卡片圆角蒙版内。
+- 除非用户明确要求原生尺寸，默认先交付轻量预览版。
 
 ## 适用场景
 
@@ -80,6 +85,11 @@ harmonyos-ux-defaults/
 ├── references/
 │   ├── quick-reference.md
 │   ├── wechat-chat-interface.md
+│   ├── xiaoyi-assistant-interface.md
+│   ├── lock-screen-visual-defaults.md
+│   ├── lock-screen-notification-card.md
+│   ├── push-notification-banner.md
+│   ├── phone-in-hand-contact-compositing.md
 │   ├── device-preview-frames.md
 │   ├── system-chrome-verification.md
 │   ├── navigation-bar-geometry.md
@@ -89,6 +99,9 @@ harmonyos-ux-defaults/
 │   └── source-index.md
 └── scripts/
     ├── composite_validate_bezel.py
+    ├── validate_live_view_blur_boundary.py
+    ├── push_notification_banner_geometry.py
+    ├── lock_screen_notification_geometry.py
     ├── expanded_live_view_geometry.py
     ├── navigation_bar_geometry.py
     ├── resolve_harmonyos_fonts.py
@@ -131,6 +144,21 @@ harmonyos-ux-defaults/
 
 聊天界面应保留左右消息流、头像与气泡关系、居中时间分隔、固定底部输入区，以及系统覆盖层出现时不重排聊天内容的行为。
 
+### 锁屏与通知
+
+- Pura X View 锁屏的前摄、状态栏边距、壁纸取色时钟和底部快捷方式遵循 [`references/lock-screen-visual-defaults.md`](references/lock-screen-visual-defaults.md)。
+- 应用内或桌面 Push 横幅遵循 [`references/push-notification-banner.md`](references/push-notification-banner.md)。
+- 锁屏详情通知卡片遵循 [`references/lock-screen-notification-card.md`](references/lock-screen-notification-card.md)，不得与桌面 Push 横幅混为同一布局。
+- 通知材质、底部短条和快捷方式均从局部壁纸取色并使用语义透明层，禁止直接画成纯白色。
+
+### 小艺智能助手
+
+小艺主界面的标题区、右上角三个玻璃按钮、非标准蓝色对话气泡、四个功能 Chips、独立星星按钮和底部输入区遵循 [`references/xiaoyi-assistant-interface.md`](references/xiaoyi-assistant-interface.md)。规范明确规定电话按钮的星星大小关系、更多按钮的四个小圆点、各 Chip 图标细节，并删除右下角向下箭头控件。
+
+### 手机与人物场景合成
+
+凡画面出现手、人物或环境，先生成并冻结符合目标机型、方向和折叠状态的设备母版，再把手和环境作为独立前景/背景层合成。场景生成不得重绘或改变机框、屏幕比例、前摄孔位和系统栏。完整流程见 [`references/phone-in-hand-contact-compositing.md`](references/phone-in-hand-contact-compositing.md)。
+
 ### 展开实况窗
 
 对于逻辑宽度为 `W` 的手机画布，展开实况窗使用：
@@ -143,7 +171,7 @@ height = (W - 32 vp) × 6 / 17
 cornerRadius = 20 vp
 ```
 
-材质包含模糊的下层内容、`48%` 中性深色覆盖层和 `25%` 中性描边。逻辑几何应先完整计算，再转换为目标光栅并仅舍入一次。
+材质包含模糊的下层内容、`48%` 中性深色覆盖层和 `25%` 中性描边。必须先独立完成并冻结正常应用界面，再把实况窗作为顶层覆盖层叠加；不得移动、删除或重排底层内容为卡片“让位”。背景模糊、取色和灰度处理必须严格裁切在 `20 vp` 圆角蒙版内，卡片外像素须与无卡片版本保持一致。逻辑几何应先完整计算，再转换为目标光栅并仅舍入一次。
 
 完整规则见 [`references/expanded-live-view-card.md`](references/expanded-live-view-card.md)。
 
@@ -169,6 +197,9 @@ python3 scripts/resolve_harmonyos_fonts.py --help
 python3 scripts/navigation_bar_geometry.py --help
 python3 scripts/expanded_live_view_geometry.py --help
 python3 scripts/composite_validate_bezel.py --help
+python3 scripts/validate_live_view_blur_boundary.py --help
+python3 scripts/push_notification_banner_geometry.py --help
+python3 scripts/lock_screen_notification_geometry.py --help
 python3 scripts/resolve_harmonyos_fonts.py --help
 ```
 
@@ -180,6 +211,10 @@ python3 scripts/resolve_harmonyos_fonts.py --help
 - 设备机框、状态栏和导航条没有被意外改变。
 - 外置字体和受控资产通过完整性校验。
 - 示例值没有被错误地当作所有设备的固定值。
+- 实况窗外的底层应用像素未被模糊、移位、删除或重排。
+- 手、人物与环境合成未改变设备母版的屏幕比例、机框、前摄和系统栏。
+- 锁屏、通知与小艺界面使用对应参考中的独立响应式规则。
+- 未指定原生尺寸时只交付轻量预览，并在回复中提示可继续生成原生尺寸版本。
 
 ## 来源与维护原则
 
